@@ -1,5 +1,5 @@
 # Exibe informações de receita, despesa e saldo total
-def visualizar_saldo(usuarios):
+def saldo(usuarios):
     # variaveis locais de receita, despesa e saldo 
     receita_total = 0
     despesa_total = 0
