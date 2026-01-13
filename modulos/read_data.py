@@ -1,19 +1,15 @@
-# Exibe informações de receita, despesa e saldo total
-def saldo(usuarios):
+import pandas as pd
+
+def saldo():
+    tabela = 'planilha_organizador_financeiro.xlsx'
+
+    consulta_tabela = pd.read_excel(tabela)
+    tabela = consulta_tabela[consulta_tabela['usuario'] == 'alexandro']
+
+    usuario_alexandro = tabela['usuario'][1]
     # variaveis locais de receita, despesa e saldo 
-    receita_total = 0
-    despesa_total = 0
-
-    # loop para encontrar o valor em cada lista de receita 
-    for i in range(len(usuarios[0]['receita'])):
-        receita_usuario = usuarios[0]['receita'][i]['valor']
-        receita_total += receita_usuario
-
-    # loop para encontrar o valor em cada lista de despesa 
-    for i in range(len(usuarios[0]['despesa'])):
-        despesa_usuario = usuarios[0]['despesa'][i]['valor']
-        despesa_total += despesa_usuario
-    
+    receita_total = int(tabela['receita'].sum())
+    despesa_total = int(tabela['despesa'].sum())
     saldo = receita_total - despesa_total
 
-    print(f"Usuario: {usuarios[0]['usuario1'].capitalize()}", f"Receita: {receita_total:,}", f"Despesa: {despesa_total:,}", f"Saldo: {saldo:,}", sep='\n')
+    print(f"Usuario: {usuario_alexandro.capitalize()}", f"Receita: {receita_total:,}", f"Despesa: {despesa_total:,}", f"Saldo: {saldo:,}", sep='\n')
