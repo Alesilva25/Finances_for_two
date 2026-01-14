@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Exclui entradas em receitas ou despesas
-def excluir_registro(arquivo):
-    arquivo = pd.read_excel('../Finances_for_two/planilha_organizador_financeiro.xlsx')
+def excluir_registro(arquivo_fonte):
+    arquivo = pd.read_csv(arquivo_fonte)
     df = pd.DataFrame(arquivo)
 
     #recebe valor para procurar
@@ -13,4 +13,4 @@ def excluir_registro(arquivo):
     # exclui index
     df = df.drop(i_valor_procurado)
     # atualiza arquivo
-    return df.to_excel('planilha_organizador_financeiro.xlsx', index=False)
+    return df.to_csv('planilha_organizador_financeiro.csv', index=False)

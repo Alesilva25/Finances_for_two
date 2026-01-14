@@ -1,12 +1,14 @@
 import pandas as pd
 from pathlib import Path
-import modulos.create_entry as create #FUNCIONA
-import modulos.read_data as read #FUNCIONA
+import modulos.create_entry as create 
+import modulos.read_data as read
 import modulos.update_entry as update
-import modulos.delete_entry as delete # FUNCIONA
+import modulos.delete_entry as delete
 
-arquivo = 'planilha_organizador_financeiro.xlsx'
+arquivo = '../Finances_for_two/planilha_organizador_financeiro.csv'
 
-print(f"{read.tabela(arquivo)} \n")
+print(read.tabela(arquivo))
 
-read.saldo(arquivo)
+delete.excluir_registro(arquivo)
+
+print(read.tabela(arquivo))

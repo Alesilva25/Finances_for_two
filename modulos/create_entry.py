@@ -1,8 +1,7 @@
 import pandas as pd
 
-
 def receita(arquivo):
-    df_antigo = pd.read_excel(arquivo)
+    df_antigo = pd.read_csv(arquivo)
 
     try:
         usuario = input("Digite o nome do usuário: ")
@@ -26,7 +25,7 @@ def receita(arquivo):
         # adiciona o dicionário na chave de receita em usuario
         df_final = pd.concat([df_antigo, receita_df], ignore_index=True)
 
-        salva_registro = df_final.to_excel(arquivo, index=False)
+        salva_registro = df_final.to_csv(arquivo, index=False)
 
         return salva_registro
     # exibe o erro
@@ -35,7 +34,7 @@ def receita(arquivo):
 
 # Cria loop para registro de receita
 def despesa(arquivo):
-    df_antigo = pd.read_excel(arquivo)
+    df_antigo = pd.read_csv(arquivo)
     try:
         usuario = input("Digite o nome do usuário: ")
         nome_despesa = input("Nome da despesa: ")
@@ -58,7 +57,7 @@ def despesa(arquivo):
         # adiciona o dicionário na chave de despesa em usuario
         df_final = pd.concat([df_antigo, despesa_df], ignore_index=True)
 
-        salva_registro = df_final.to_excel(arquivo, index=False)
+        salva_registro = df_final.to_csv(arquivo, index=False)
 
         return salva_registro
     # exibe o erro

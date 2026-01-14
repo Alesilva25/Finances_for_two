@@ -1,29 +1,29 @@
+import pandas as pd
+
 # Altera os dados de nome ou valor em uma receita ou despesa
-def alterar_registro(usuarios):
-    op = int(input("1 - Editar receita \n2 - Editar despesa: "))
-    busca_nome = input("Digite o nome do registro que procura: ")
+def alterar_registro(arquivo):
+    df = pd.read_csv(arquivo)
+    valor_procurado = input("Digite o nome que deseja atualizar: ").casefold()
 
-    if op == 1:
-        for i in range(len(usuarios[0]['receita'])):
-            nome = usuarios[0]['receita'][i]['nome']
+    # retorna linha do valor procurado
+    filtro = df[df['nome'].str.casefold() == valor_procurado]
 
-            if busca_nome in nome:
-                usuarios[0]['receita'][i]['nome'] = input("Digite o novo nome: ").casefold()
+    i = int(filtro.index[0])
 
-                novo_valor = input("Digite o novo valor: ")
-                novo_valor = novo_valor.replace(',', '.')
-                novo_valor = float(novo_valor)
+    if int(filtro['receita'].iloc[0]) > 0:
+        usuario = input("Nome do usuário: ")
+        item = input("Nome da receita: ")
+        valor_receita = int(input("Digite o valor da receita: "))
+        valor_despesa = 0
 
-                usuarios[0]['receita'][i]['valor'] = novo_valor
-    elif op == 2:
-        for i in range(len(usuarios[0]['despesa'])):
-            nome = usuarios[0]['despesa'][i]['nome']
+        df.loc[i, ['usuario', 'nome', 'receita', 'despesa']] = [usuario, item, valor_receita, valor_despesa]
 
-            if busca_nome in nome:
-                usuarios[0]['despesa'][i]['nome'] = input("Digite o novo nome: ").casefold()
+    elif int(filtro['despesa'].iloc[0]) > 0:
+        usuario = input("Nome do usuário: ")
+        item = input("Nome da despesa: ")
+        valor_receita = 0
+        valor_despesa = int(input("Digite o valor da despesa: "))
 
-                novo_valor = input("Digite o novo valor: ")
-                novo_valor = novo_valor.replace(',', '.')
-                novo_valor = float(novo_valor)
+        df.loc[i, ['usuario', 'nome', 'receita', 'despesa']] = [usuario, item, valor_receita, valor_despesa]
 
-                usuarios[0]['despesa'][i]['valor'] = novo_valor
+    df.to_csv(arquivo, index=False)
