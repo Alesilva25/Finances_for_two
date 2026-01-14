@@ -1,15 +1,16 @@
-# Exclui entradas em receitas ou despesas
-def excluir_registro(usuarios):
-    op = int(input("1 - Excluir receita \n2 - Excluir despesa: "))
-    valor_procurado = input("Digite o nome que procura: ").casefold()
+import pandas as pd
 
-    if op == 1:
-        for item in usuarios[0]['receita']:
-            if item.get('nome') == valor_procurado:
-                usuarios[0]['receita'].remove(item)
-                break
-    elif op == 2:
-        for item in usuarios[0]['despesa']:
-            if item.get('nome') == valor_procurado:
-                usuarios[0]['despesa'].remove(item)
-                break
+# Exclui entradas em receitas ou despesas
+def excluir_registro(arquivo):
+    arquivo = pd.read_excel('../Finances_for_two/planilha_organizador_financeiro.xlsx')
+    df = pd.DataFrame(arquivo)
+
+    #recebe valor para procurar
+    valor_procurado = input("Digite o valor que procura: ").casefold()
+
+    # retorna index do valor procurado
+    i_valor_procurado = df[df['nome'].str.casefold() == valor_procurado].index
+    # exclui index
+    df = df.drop(i_valor_procurado)
+    # atualiza arquivo
+    return df.to_excel('planilha_organizador_financeiro.xlsx', index=False)

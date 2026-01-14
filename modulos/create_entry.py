@@ -1,8 +1,9 @@
 import pandas as pd
-tabela = 'planilha_organizador_financeiro.xlsx'
-df_antigo = pd.read_excel(tabela)
 
-def receita():
+
+def receita(arquivo):
+    df_antigo = pd.read_excel(arquivo)
+
     try:
         usuario = input("Digite o nome do usuário: ")
         nome_receita = input("Nome da receita: ")
@@ -25,7 +26,7 @@ def receita():
         # adiciona o dicionário na chave de receita em usuario
         df_final = pd.concat([df_antigo, receita_df], ignore_index=True)
 
-        salva_registro = df_final.to_excel(tabela, index=False)
+        salva_registro = df_final.to_excel(arquivo, index=False)
 
         return salva_registro
     # exibe o erro
@@ -33,7 +34,8 @@ def receita():
         print("Erro: {e}. Tente Novamente!")
 
 # Cria loop para registro de receita
-def despesa():
+def despesa(arquivo):
+    df_antigo = pd.read_excel(arquivo)
     try:
         usuario = input("Digite o nome do usuário: ")
         nome_despesa = input("Nome da despesa: ")
@@ -56,7 +58,7 @@ def despesa():
         # adiciona o dicionário na chave de despesa em usuario
         df_final = pd.concat([df_antigo, despesa_df], ignore_index=True)
 
-        salva_registro = df_final.to_excel(tabela, index=False)
+        salva_registro = df_final.to_excel(arquivo, index=False)
 
         return salva_registro
     # exibe o erro
