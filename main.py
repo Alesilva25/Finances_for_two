@@ -7,8 +7,6 @@ import modulos.delete_entry as delete
 
 arquivo = '../Finances_for_two/planilha_organizador_financeiro.csv'
 
-print(read.tabela(arquivo))
-
-delete.excluir_registro(arquivo)
+read.saldo(arquivo)
 
 print(read.tabela(arquivo))
